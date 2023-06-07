@@ -24,6 +24,7 @@ modules:
     requires:
       - name: Hackathon-db
 
+
   - name: Hackathon-db-deployer
     type: hdb
     path: db #gen/db
