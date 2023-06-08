@@ -21,7 +21,7 @@ service Hackathon {
         modifiedBy,
         createdAt,
         createdBy,
-        Items : Composition of many items on Items.Order = $self
+        Items : Association to many items on Items.Order = $self
     };
 
     entity items  as projection on Items;
