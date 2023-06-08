@@ -11,11 +11,11 @@ entity plants : cuid {
     Botanical_Name    : String;
     Category          : String;
     Planting_Season   : String;
-    Default_Image     : LargeBinary ;
-    autmn_Image       : LargeBinary ;
-    spring_Image      : LargeBinary ;
-    summer_Image      : LargeBinary ;
-    winter_Image      : LargeBinary ;
+    Default_Image     : LargeBinary;
+    autmn_Image       : LargeBinary;
+    spring_Image      : LargeBinary;
+    summer_Image      : LargeBinary;
+    winter_Image      : LargeBinary;
     Size              : String;
     Area_Required     : String;
     area_unit         : String;
@@ -23,25 +23,27 @@ entity plants : cuid {
     water_unit        : String;
     Sunlight          : String;
     lifespan          : String;
+    images  : Association to one PlantImages on images.Plant = $self;
 
 }
 
-entity Orders : cuid, managed {
-    OrderNo  : String(22) @title: 'Order Number';
-    items    : Composition of many Items
-                   on items.Order = $self;
-    buyer    : String;
-    currency : Currency;
+entity Orders : managed {
+    key ID       : Integer;
+        OrderNo  : String(22) @title: 'Order Number';
+        items    : Composition of many Items
+                       on items.Order = $self;
+        buyer    : String;
+        currency : Currency;
 
 }
 
-entity Items : cuid {
-
-    Order    : Association to Orders;
-    plant    : Association to plants;
-    quantity : Integer;
-    title    : String; //> intentionally replicated as snapshot from product.title
-    price    : Double; //> materialized calculated field
+entity Items {
+    key ID       : Integer;
+        Order    : Association to Orders;
+        plant    : Association to plants;
+        quantity : Integer;
+        title    : String; //> intentionally replicated as snapshot from product.title
+        price    : Double; //> materialized calculated field
 };
 
 entity Rating {
@@ -53,6 +55,15 @@ entity Rating {
 }
 
 entity BlobTest : cuid {
-imagedata : LargeBinary;
-mimetype : String(100);
+    imagedata : LargeBinary;
+    mimetype  : String(100);
+}
+
+entity PlantImages : cuid {
+    Plant : Association to one plants ; 
+    Default_Image : LargeBinary;
+    autmn_Image   : LargeBinary;
+    spring_Image  : LargeBinary;
+    summer_Image  : LargeBinary;
+    winter_Image  : LargeBinary;
 }
