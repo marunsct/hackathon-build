@@ -2,7 +2,8 @@ using {
     Orders,
     plants,
     Rating,
-    Items
+    Items,
+    BlobTest
 } from '../db/fourseasons';
 
 service Hackathon  {
@@ -27,5 +28,7 @@ service Hackathon  {
         Updatable : true
     }
     entity rating as projection on Rating;
+
+    entity Blobtest as projection on BlobTest;
 
 }

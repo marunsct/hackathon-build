@@ -9,16 +9,17 @@ entity plants : cuid {
 
     Plant_Name        : String;
     Botanical_Name    : String;
+    Category          : String;
     Planting_Season   : String;
-    Default_Image     : LargeBinary @Core.MediaType: 'image/png';
-    Season1_Image     : LargeBinary @Core.MediaType: 'image/png';
-    Season2_Image     : LargeBinary @Core.MediaType: 'image/png';
-    Season3_Image     : LargeBinary @Core.MediaType: 'image/png';
-    Season4_Image     : LargeBinary @Core.MediaType: 'image/png';
-    Size              : Decimal(10, 2);
-    Area_Required     : Decimal(10, 2);
+    Default_Image     : LargeBinary ;
+    autmn_Image       : LargeBinary ;
+    spring_Image      : LargeBinary ;
+    summer_Image      : LargeBinary ;
+    winter_Image      : LargeBinary ;
+    Size              : String;
+    Area_Required     : String;
     area_unit         : String;
-    Water_Requirement : Decimal(10, 2);
+    water_Requirement : String;
     water_unit        : String;
     Sunlight          : String;
     lifespan          : String;
@@ -27,8 +28,9 @@ entity plants : cuid {
 
 entity Orders : cuid, managed {
     OrderNo  : String(22) @title: 'Order Number';
-    items    : Composition of many Items on items.Order = $self;
-    buyer : String;
+    items    : Composition of many Items
+                   on items.Order = $self;
+    buyer    : String;
     currency : Currency;
 
 }
@@ -47,4 +49,10 @@ entity Rating {
         screen    : Integer;
         operation : Integer;
         order     : Integer;
+        User      : String;
+}
+
+entity BlobTest : cuid {
+imagedata : LargeBinary;
+mimetype : String(100);
 }
